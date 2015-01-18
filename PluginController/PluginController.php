@@ -957,7 +957,7 @@ abstract class PluginController implements PluginControllerInterface
             throw new InvalidPaymentInstructionException('PaymentInstruction must be in STATE_VALID.');
         }
 
-        if (PaymentInterface::STATE_APPROVED !== $payment->getState()) {
+        if (PaymentInterface::STATE_DEPOSITED !== $payment->getState()) {
             throw new InvalidPaymentException('Payment must be in STATE_APPROVED.');
         }
 
@@ -975,6 +975,7 @@ abstract class PluginController implements PluginControllerInterface
             $transaction->setTransactionType(FinancialTransactionInterface::TRANSACTION_TYPE_REVERSE_DEPOSIT);
             $transaction->setState(FinancialTransactionInterface::STATE_PENDING);
             $transaction->setRequestedAmount($amount);
+            $payment->addTransaction($transaction);
 
             $payment->setReversingDepositedAmount($amount);
             $instruction->setReversingDepositedAmount($instruction->getReversingDepositedAmount() + $amount);
