@@ -68,8 +68,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -95,8 +94,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -127,8 +125,7 @@ class EntityPluginController extends PluginController
 
             return $credit;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -150,8 +147,7 @@ class EntityPluginController extends PluginController
 
             return $credit;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -184,8 +180,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -211,8 +206,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -287,8 +281,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -311,8 +304,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -335,8 +327,7 @@ class EntityPluginController extends PluginController
 
             return $result;
         } catch (\Exception $failure) {
-            $this->entityManager->getConnection()->rollback();
-            $this->entityManager->close();
+            $this->doRollback();
 
             throw $failure;
         }
@@ -396,5 +387,11 @@ class EntityPluginController extends PluginController
         }
 
         return $paymentInstruction;
+    }
+
+    protected function doRollback()
+    {
+        $this->entityManager->getConnection()->rollback();
+        //$this->entityManager->close();
     }
 }
