@@ -21,7 +21,7 @@
     </parameters>
 
     <services>
-        <service id="payment.orm.entity_manager" alias="doctrine.orm.default_entity_manager" public="false" />
+        <service id="payment.orm.entity_manager" alias="doctrine.orm.zizoo_entity_manager" public="false" />
     
         <service id="payment.plugin_controller.entity" class="%payment.plugin_controller.entity.class%" public="false">
             <argument type="service" id="payment.orm.entity_manager"/>
