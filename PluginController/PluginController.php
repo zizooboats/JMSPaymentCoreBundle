@@ -668,6 +668,7 @@ abstract class PluginController implements PluginControllerInterface
 
                 $instruction->setDepositingAmount($instruction->getDepositingAmount() - $amount);
                 $instruction->setDepositedAmount($instruction->getDepositedAmount() + $transaction->getProcessedAmount());
+                $transaction->setState(FinancialTransactionInterface::STATE_SUCCESS);
 
                 if ($changePaymentState) {
                     $this->dispatchPaymentStateChange($payment, $oldState);
@@ -678,6 +679,7 @@ abstract class PluginController implements PluginControllerInterface
                 $payment->setState(PaymentInterface::STATE_FAILED);
                 $payment->setDepositingAmount(0.0);
                 $instruction->setDepositingAmount($instruction->getDepositingAmount() - $amount);
+                $transaction->setState(FinancialTransactionInterface::STATE_FAILED);
 
                 $this->dispatchPaymentStateChange($payment, $oldState);
 
@@ -687,6 +689,7 @@ abstract class PluginController implements PluginControllerInterface
             $payment->setState(PaymentInterface::STATE_FAILED);
             $payment->setDepositingAmount(0.0);
             $instruction->setDepositingAmount($instruction->getDepositingAmount() - $amount);
+            $transaction->setState(FinancialTransactionInterface::STATE_FAILED);
 
             $this->dispatchPaymentStateChange($payment, $oldState);
 
